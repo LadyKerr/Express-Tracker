@@ -13,7 +13,7 @@ server.use(express.json());
 server.use("/api/expenses", expenseRouter);
 
 server.get("/", (req, res) => {
-  res.send("it's alive! LEt's track these expenses!");
+  res.send("it's alive! Let's track these expenses!");
 });
 
 module.exports = server;
