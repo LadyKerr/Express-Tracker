@@ -6,8 +6,8 @@ module.exports = {
   fetchById,
   add,
   remove,
-  update,
-  getUserExpenses
+  update
+  //getUserExpenses
 };
 
 //fetch all expenses
@@ -50,11 +50,11 @@ function update(changes, id) {
     .update(changes);
 }
 
-//get user's expenses using foreign key: user_id
-function getUserExpenses(userId) {
-  return db("expenses")
-    .where("user_id", userId)
-    .then(expense => {
-      return expense;
-    });
-}
+// //get user's expenses using foreign key: user_id
+// function getUserExpenses(userId) {
+//   return db("expenses")
+//     .where("user_id", userId)
+//     .then(expense => {
+//       return expense;
+//     });
+// }

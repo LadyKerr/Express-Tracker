@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const Expenses = require("./expense-model");
-const Users = require("../users/user-model");
+//const Users = require("../users/user-model");
 
 //get all expenses
 router.get("/", (req, res) => {
@@ -36,27 +36,27 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//get user expenses by their ids
-router.get("/:id/expenses", (req, res) => {
-  const { id } = req.params;
+// //get user expenses by their ids
+// router.get("/:id/expenses", (req, res) => {
+//   const { id } = req.params;
 
-  Expenses.getUserExpenses(id)
-    .then(userExpense => {
-      if (userExpense && userExpense.length) {
-        res.status(200).json(userExpense);
-      } else {
-        res
-          .status(404)
-          .json({ message: "The expense with that userID does not exist." });
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res
-        .status(500)
-        .json({ message: "There was an error retrieving the user's expense" });
-    });
-});
+//   Expenses.getUserExpenses(id)
+//     .then(userExpense => {
+//       if (userExpense && userExpense.length) {
+//         res.status(200).json(userExpense);
+//       } else {
+//         res
+//           .status(404)
+//           .json({ message: "The expense with that userID does not exist." });
+//       }
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res
+//         .status(500)
+//         .json({ message: "There was an error retrieving the user's expense" });
+//     });
+// });
 
 //add new expense
 router.post("/", (req, res) => {
