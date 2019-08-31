@@ -48,4 +48,6 @@ router.post("/login", (req, res) => {
     });
 });
 
+module.exports = router;
+
 //Auth Router handles login and register
