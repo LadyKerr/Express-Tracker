@@ -2,12 +2,11 @@ const db = require("../../data/db-config");
 
 module.exports = {
   fetchUsers,
-  findBy,
+  fetchBy,
   fetchById,
   add,
   remove,
-  update,
-  getUserExpenses
+  update
 };
 
 //fetch all users
@@ -22,8 +21,8 @@ function fetchById(id) {
     .first();
 }
 
-//findby specified filter
-function findBy(filter) {
+//fetchBy specified filter
+function fetchBy(filter) {
   return db("users").where(filter);
 }
 
@@ -48,13 +47,4 @@ function update(changes, id) {
   return db("users")
     .where({ id })
     .update(changes);
-}
-
-//get user's expenses from expense table using foreign key: user_id
-function getUserExpenses(userId) {
-  return db("expenses")
-    .where("user_id", userId)
-    .then(expense => {
-      return expense;
-    });
 }
