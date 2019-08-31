@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const Expenses = require("./expense-model");
+const Users = require("../users/user-model");
 
 //get all expenses
 router.get("/", (req, res) => {
@@ -35,7 +36,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//get user expenses once expenses route is configured
+//get user expenses by their ids
 router.get("/:id/expenses", (req, res) => {
   const { id } = req.params;
 
@@ -56,5 +57,55 @@ router.get("/:id/expenses", (req, res) => {
         .json({ message: "There was an error retrieving the user's expense" });
     });
 });
+
+//add new expense
+router.post("/", (req, res) => {
+  const { amount, category, notes, date, paid } = req.body;
+
+  if (!amount || !category || !date) {
+    res
+      .status(400)
+      .json({ message: "Please add amount, category and description" });
+  } else {
+    Expenses.add(req.body)
+      .then(newExpense => {
+        res.status(200).json(newExpense);
+      })
+      .catch(err => {
+        console.log(err);
+        res
+          .status(500)
+          .json({ message: "There was an error adding that expense" });
+      });
+  }
+});
+
+//update expense
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+  const { amount, category, notes, date, paid } = req.body;
+
+  Expenses.update(id, changes)
+    .then(updated => {
+      if (!updated) {
+        res.status(404).json({ message: "That expense does not exist" });
+      } else if (!amount || !category || !date) {
+        res
+          .status(400)
+          .json({ errorMessage: "Please provide amount, category and date" });
+      } else {
+        res.status(200).json(updated);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "There was an error updating that expense." });
+    });
+});
+
+//add new expense for existing user
 
 module.exports = router;

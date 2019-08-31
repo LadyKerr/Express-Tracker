@@ -4,7 +4,7 @@ const helmet = require("helmet");
 
 const authRouter = require("../routes/auth/auth-router");
 const userRouter = require("../routes/users/user-router");
-const expenseRouter = require("../expenses/expense-router");
+const expenseRouter = require("../routes/expenses/expense-router");
 //const incomeRouter = require("../routes/income/income-router");
 
 const server = express();
