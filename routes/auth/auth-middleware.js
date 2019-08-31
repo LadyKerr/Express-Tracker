@@ -13,5 +13,9 @@ module.exports = (req, res, next) => {
         next();
       }
     });
+  } else {
+    res.status(401).json({ message: "login unsuccessful. Please try again." });
   }
 };
+
+//restricted global middleware
