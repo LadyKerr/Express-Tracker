@@ -1,9 +1,16 @@
-//const router = require("express").Router();
+const router = require("express").Router();
 
 const Users = require("./user-model");
+const restricted = require("../auth/auth-middleware");
 
-Users.fetchUsers()
-  .then(users => {
-    res.json(users);
-  })
-  .catch(err => res.send(err));
+router.get("/", restricted, (req, res) => {
+  Users.fetchUsers()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(err => {
+      res.status(500).json({ err, message: "Error while retrieving users" });
+    });
+});
+
+module.exports = router;
