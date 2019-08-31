@@ -11,21 +11,14 @@ module.exports = {
 
 //fetch all users
 function fetchUsers() {
-  return db("users");
+  return db("users").select("*");
 }
 
 //fetch users by id
 function fetchById(id) {
   return db("users")
     .where({ id })
-    .first()
-    .then(user => {
-      if (user) {
-        return user;
-      } else {
-        return null;
-      }
-    });
+    .first();
 }
 
 //findby specified filter
