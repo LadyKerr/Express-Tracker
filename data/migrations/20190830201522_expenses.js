@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function(knex, Promise) {
   knex.schema.createTable("expenses", tbl => {
     tbl
       .integer("user_id")
@@ -20,6 +20,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function(knex, Promise) {
   return knex.schema.dropTableIfExists("expenses");
 };
