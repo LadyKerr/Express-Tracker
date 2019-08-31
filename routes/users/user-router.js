@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const Users = require("./user-model");
+//const Expenses = require("../expenses/expense-model");
 //const restricted = require("../auth/auth-middleware");
 
 router.get("/", (req, res) => {
@@ -29,6 +30,28 @@ router.get("/:id", (req, res) => {
       res
         .status(500)
         .json({ err, message: "There was an error finding that user" });
+    });
+});
+
+//get user expenses once expenses route is configured
+router.get("/:id/expenses", (req, res) => {
+  const { id } = req.params;
+
+  Users.getUserExpenses(id)
+    .then(userExpense => {
+      if (userExpense && userExpense.length) {
+        res.status(200).json(userExpense);
+      } else {
+        res
+          .status(404)
+          .json({ message: "The expense with that userID does not exist." });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "There was an error retrieving the user's expense" });
     });
 });
 
