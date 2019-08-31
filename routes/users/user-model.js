@@ -2,6 +2,7 @@ const db = require("../../data/db-config");
 
 module.exports = {
   fetchUsers,
+  findBy,
   fetchById,
   add,
   remove,
@@ -25,6 +26,11 @@ function fetchById(id) {
         return null;
       }
     });
+}
+
+//findby specified filter
+function findBy(filter) {
+  return db("users").where(filter);
 }
 
 //add user
