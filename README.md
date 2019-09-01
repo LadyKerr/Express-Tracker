@@ -20,11 +20,12 @@ Track Your Coins (TYC) allows you to keep daily logs of your expenses. You can s
 | [POST Login](#post-login)               | `/api/auth/login`    |
 
 ### [POST] Registration
+
 #### URL: (add url for register endpoint)
 
 This endpoint will return an object with user id, username, password, first_name (optional) and last_name (optional). The password will be a long incomprehensible string, because it is hashed. Example:
 
-``` javascript
+```javascript
 {
   "id": 8,
   "username": "KDoe",
@@ -33,6 +34,16 @@ This endpoint will return an object with user id, username, password, first_name
   "last_name": "Doe"
 }
 ```
+
 ### [POST] Login
+
 #### URL: (add url for login endpoint)
 
+This endpoint will return an object with a welcome message and a token. The token is required for authentication and needs to be saved to local storage in order for the user to continue to protected routes. Example:
+
+```javascript
+{
+  "message": "Nice to see you KLady!",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJLTGFkeSIsImlhdCI6MMDU0MSwiZXhwIjoxNTY3Mzg2OTQxfQE0guVX8uGeftL5bBT5UosjRkTQmf5fICKOpbPDLK2aE"
+}
+```
