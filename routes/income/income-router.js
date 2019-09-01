@@ -53,30 +53,30 @@ router.post("/", (req, res) => {
   }
 });
 
-//update income - NOT WORKING. WHYYY???
+//update income
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
   const { payor, amount } = req.body;
 
-  Income.update(id, changes)
-    .then(updated => {
-      if (!updated) {
-        res.status(404).json({ message: "That income does not exist" });
-      } else if (!payor || !amount) {
+  if (!payor || !amount) {
+    res.status(400).json({ errorMessage: "Please provide payor and amount" });
+  } else {
+    Income.update(id, changes)
+      .then(updated => {
+        if (!updated) {
+          res.status(404).json({ message: "That income does not exist" });
+        } else {
+          res.status(200).json(updated);
+        }
+      })
+      .catch(err => {
+        console.log(err);
         res
-          .status(400)
-          .json({ errorMessage: "Please provide payor and amount" });
-      } else {
-        res.status(200).json(updated);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res
-        .status(500)
-        .json({ message: "There was an error updating that income." });
-    });
+          .status(500)
+          .json({ message: "There was an error updating that income." });
+      });
+  }
 });
 
 //delete an income
