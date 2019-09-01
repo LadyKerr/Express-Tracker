@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  knex.schema.createTable("expenses", tbl => {
+  return knex.schema.createTable("expenses", tbl => {
     tbl
       .integer("user_id")
       .references("id")
