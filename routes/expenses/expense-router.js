@@ -87,6 +87,7 @@ router.put("/:id", (req, res) => {
 //delete an expense
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
+
   Expenses.remove(id)
     .then(deleted => {
       if (deleted) {
