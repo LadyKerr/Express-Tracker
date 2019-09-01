@@ -58,11 +58,13 @@ This endpoint will return an object with a welcome message, user id, username an
 
 #### The endpoints below require a token. Be sure to save it!
 
-| Links                   | Endpoints           |
-| ----------------------- | ------------------- |
-| [GET All Users](#)      | `/api/users`        |
-| [GET User by ID](#)     | `/api/users/:id`    |
-| [GET All Expenses](#)   | `/api/expenses`     |
-| [GET Expenses by ID](#) | `/api/expenses/:id` |
-| [GET All Income](#)     | `/api/income`       |
-| [GET Income by ID](#)   | `/api/income/:id`   |
+| Links                   | Endpoints               |
+| ----------------------- | ----------------------- |
+| [GET All Users](#)      | `/api/users`            |
+| [GET User by ID](#)     | `/api/users/:id`        |
+| [GET All Expenses](#)   | `/api/expenses`         |
+| [GET Expenses by ID](#) | `/api/expenses/:id`     |
+| [GET User Expenses](#)  | `/api/user/:id/expense` |
+| [GET All Income](#)     | `/api/income`           |
+| [GET Income by ID](#)   | `/api/income/:id`       |
+| [GET User Income](#)    | `/api/user/:id/income`  |
