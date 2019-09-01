@@ -43,7 +43,7 @@ function remove(id) {
 }
 
 //update income
-function update(changes, id) {
+function update(id, changes) {
   return db("income")
     .where({ id })
     .update(changes);
