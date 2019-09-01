@@ -7,7 +7,8 @@ module.exports = {
   add,
   remove,
   update,
-  getUserExpenses
+  getUserExpenses,
+  getUserIncome
 };
 
 //fetch all users
@@ -28,6 +29,15 @@ function getUserExpenses(userId) {
     .where("user_id", userId)
     .then(expense => {
       return expense;
+    });
+}
+
+//get user's income using foreign key: user_id
+function getUserIncome(userId) {
+  return db("income")
+    .where("user_id", userId)
+    .then(income => {
+      return income;
     });
 }
 

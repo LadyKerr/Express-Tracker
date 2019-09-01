@@ -57,4 +57,26 @@ router.get("/:id/expenses", (req, res) => {
     });
 });
 
+//get user income
+router.get("/:id/income", (req, res) => {
+  const { id } = req.params;
+
+  Users.getUserIncome(id)
+    .then(userIncome => {
+      if (userIncome && userIncome.length) {
+        res.status(200).json(userIncome);
+      } else {
+        res
+          .status(404)
+          .json({ message: "The income with that userID does not exist." });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "There was an error retrieving the user's income" });
+    });
+});
+
 module.exports = router;
