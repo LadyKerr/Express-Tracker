@@ -64,3 +64,5 @@ This endpoint will return an object with a welcome message, user id, username an
 | [GET User by ID](#)     | `/api/users/:id`    |
 | [GET All Expenses](#)   | `/api/expenses`     |
 | [GET Expenses by ID](#) | `/api/expenses/:id` |
+| [GET All Income](#)     | `/api/income`       |
+| [GET Income by ID](#)   | `/api/income/:id`   |
