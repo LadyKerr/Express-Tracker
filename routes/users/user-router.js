@@ -1,22 +1,22 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
-const Users = require("./user-model");
+const Users = require('./user-model');
 //const Expenses = require("../expenses/expense-model");
 //const restricted = require("../auth/auth-middleware");
 
 //get all users
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   Users.fetchUsers()
     .then(users => {
       res.status(200).json(users);
     })
     .catch(err => {
-      res.status(500).json({ err, message: "Error while retrieving users" });
+      res.status(500).json({ err, message: 'Error while retrieving users' });
     });
 });
 
 //get users by id
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
 
   Users.fetchById(id)
@@ -24,19 +24,19 @@ router.get("/:id", (req, res) => {
       if (user) {
         res.status(200).json(user);
       } else {
-        res.status(404).json({ message: "Sorry, that user does not exist." });
+        res.status(404).json({ message: 'Sorry, that user does not exist.' });
       }
     })
     .catch(err => {
       console.log(err);
       res
         .status(500)
-        .json({ err, message: "There was an error finding that user" });
+        .json({ err, message: 'There was an error finding that user' });
     });
 });
 
 //get user expenses
-router.get("/:id/expenses", (req, res) => {
+router.get('/:id/expenses', (req, res) => {
   const { id } = req.params;
 
   Users.getUserExpenses(id)
@@ -46,7 +46,7 @@ router.get("/:id/expenses", (req, res) => {
       } else {
         res
           .status(404)
-          .json({ message: "The expense with that userID does not exist." });
+          .json({ message: 'The expense with that userID does not exist.' });
       }
     })
     .catch(err => {
@@ -58,7 +58,7 @@ router.get("/:id/expenses", (req, res) => {
 });
 
 //get user income
-router.get("/:id/income", (req, res) => {
+router.get('/:id/income', (req, res) => {
   const { id } = req.params;
 
   Users.getUserIncome(id)
@@ -68,7 +68,7 @@ router.get("/:id/income", (req, res) => {
       } else {
         res
           .status(404)
-          .json({ message: "The income with that userID does not exist." });
+          .json({ message: 'The income with that userID does not exist.' });
       }
     })
     .catch(err => {
@@ -76,6 +76,19 @@ router.get("/:id/income", (req, res) => {
       res
         .status(500)
         .json({ message: "There was an error retrieving the user's income" });
+    });
+});
+
+//update user
+router.put('/:id', (req, res) => {
+  const user = req.body;
+  const { id } = req.params;
+  Users.update(user, id)
+    .then(changes => {
+      res.status(200).json(changes);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Could not update that user in the db' });
     });
 });
 
