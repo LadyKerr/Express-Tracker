@@ -64,24 +64,26 @@ router.put("/:id", (req, res) => {
   const changes = req.body;
   const { amount, category, date } = req.body;
 
-  Expenses.update(id, changes)
-    .then(updated => {
-      if (!updated) {
-        res.status(404).json({ message: "That expense does not exist" });
-      } else if (!amount || !category || !date) {
+  if (!amount || !category || !date) {
+    res
+      .status(400)
+      .json({ errorMessage: "Please provide amount, category and date" });
+  } else {
+    Expenses.update(id, changes)
+      .then(updated => {
+        if (!updated) {
+          res.status(404).json({ message: "That expense does not exist" });
+        } else {
+          res.status(200).json(updated);
+        }
+      })
+      .catch(err => {
+        console.log(err);
         res
-          .status(400)
-          .json({ errorMessage: "Please provide amount, category and date" });
-      } else {
-        res.status(200).json(updated);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res
-        .status(500)
-        .json({ message: "There was an error updating that expense." });
-    });
+          .status(500)
+          .json({ message: "There was an error updating that expense." });
+      });
+  }
 });
 
 //delete an expense
