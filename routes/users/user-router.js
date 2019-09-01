@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const Users = require("./user-model");
-const Expenses = require("../expenses/expense-model");
+//const Expenses = require("../expenses/expense-model");
 //const restricted = require("../auth/auth-middleware");
 
 //get all users
@@ -35,11 +35,11 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//get user expenses by their ids
+//get user expenses
 router.get("/:id/expenses", (req, res) => {
   const { id } = req.params;
 
-  Expenses.getUserExpenses(id)
+  Users.getUserExpenses(id)
     .then(userExpense => {
       if (userExpense && userExpense.length) {
         res.status(200).json(userExpense);
@@ -54,6 +54,28 @@ router.get("/:id/expenses", (req, res) => {
       res
         .status(500)
         .json({ message: "There was an error retrieving the user's expense" });
+    });
+});
+
+//get user income
+router.get("/:id/income", (req, res) => {
+  const { id } = req.params;
+
+  Users.getUserIncome(id)
+    .then(userIncome => {
+      if (userIncome && userIncome.length) {
+        res.status(200).json(userIncome);
+      } else {
+        res
+          .status(404)
+          .json({ message: "The income with that userID does not exist." });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "There was an error retrieving the user's income" });
     });
 });
 
