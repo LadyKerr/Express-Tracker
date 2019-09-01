@@ -80,11 +80,11 @@ router.post("/", (req, res) => {
   }
 });
 
-//update expense
+//update expense - NOT WORKING. WHYYY???
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
-  const { amount, category, notes, date, paid } = req.body;
+  const { amount, category, date } = req.body;
 
   Expenses.update(id, changes)
     .then(updated => {
