@@ -36,28 +36,6 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// //get user expenses by their ids
-// router.get("/:id/expenses", (req, res) => {
-//   const { id } = req.params;
-
-//   Expenses.getUserExpenses(id)
-//     .then(userExpense => {
-//       if (userExpense && userExpense.length) {
-//         res.status(200).json(userExpense);
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: "The expense with that userID does not exist." });
-//       }
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res
-//         .status(500)
-//         .json({ message: "There was an error retrieving the user's expense" });
-//     });
-// });
-
 //add new expense
 router.post("/", (req, res) => {
   const { amount, category, notes, date, paid } = req.body;
@@ -106,6 +84,25 @@ router.put("/:id", (req, res) => {
     });
 });
 
-//add new expense for existing user
+//delete an expense
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  Expenses.remove(id)
+    .then(deleted => {
+      if (deleted) {
+        res.status(200).json(deleted);
+      } else {
+        res
+          .status(404)
+          .json({ message: "The expense with that ID does not exist." });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "Could not delete that expense. Try again" });
+    });
+});
 
 module.exports = router;

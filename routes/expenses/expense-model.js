@@ -7,7 +7,6 @@ module.exports = {
   add,
   remove,
   update
-  //getUserExpenses
 };
 
 //fetch all expenses
@@ -49,12 +48,3 @@ function update(changes, id) {
     .where({ id })
     .update(changes);
 }
-
-// //get user's expenses using foreign key: user_id
-// function getUserExpenses(userId) {
-//   return db("expenses")
-//     .where("user_id", userId)
-//     .then(expense => {
-//       return expense;
-//     });
-// }

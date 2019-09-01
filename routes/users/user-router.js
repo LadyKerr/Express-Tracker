@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const Users = require("./user-model");
-const Expenses = require("../expenses/expense-model");
+//const Expenses = require("../expenses/expense-model");
 //const restricted = require("../auth/auth-middleware");
 
 //get all users
