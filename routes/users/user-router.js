@@ -35,11 +35,11 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//get user expenses by their ids
+//get user expenses
 router.get("/:id/expenses", (req, res) => {
   const { id } = req.params;
 
-  Expenses.getUserExpenses(id)
+  Users.getUserExpenses(id)
     .then(userExpense => {
       if (userExpense && userExpense.length) {
         res.status(200).json(userExpense);

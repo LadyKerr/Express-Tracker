@@ -23,9 +23,9 @@ function fetchById(id) {
 }
 
 //get user's expenses using foreign key: user_id
-function getUserExpenses(id) {
+function getUserExpenses(userId) {
   return db("expenses")
-    .where("user_id", id)
+    .where("user_id", userId)
     .then(expense => {
       return expense;
     });
