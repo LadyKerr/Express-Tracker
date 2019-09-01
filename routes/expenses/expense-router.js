@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
   }
 });
 
-//update expense - NOT WORKING. WHYYY???
+//update expense
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
