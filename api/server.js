@@ -19,7 +19,7 @@ server.use("/api/expenses", expenseRouter);
 server.use("/api/income", incomeRouter);
 
 server.get("/", (req, res) => {
-  res.send("it's alive! Let's track these expenses!");
+  res.status(200).json({message:"it's alive! Let's track these expenses!"});
 });
 
 module.exports = server;

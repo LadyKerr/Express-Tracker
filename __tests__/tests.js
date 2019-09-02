@@ -1,7 +1,7 @@
 const request = require('supertest');
 
 const db = require('../data/db-config.js');
-const server = require('../server.js');
+const server = require('../api/server');
 
 describe('server', () => {
   beforeEach(async () => {
@@ -22,7 +22,9 @@ describe('server', () => {
         });
     });
     it('should return a JSON object from the index route', () => {
-      const expectedBody = { message: 'API is up!' };
+      const expectedBody = {
+        message: "it's alive! Let's track these expenses!",
+      };
       return request(server)
         .get('/')
         .then(res => {
@@ -38,7 +40,7 @@ describe('server', () => {
           .get('/api/users')
           .set(
             'Authorization',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6Im1pa2UudmFuc2xlZW4iLCJpYXQiOjE1NjY1MDkyODUsImV4cCI6MTU2NjUzODA4NX0.b7JdXwQBaURv6lJcxKynGtOI5oCSD9UvpvStbcZw55s',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwidXNlcm5hbWUiOiJKb3NlTSIsImlhdCI6MTU2NzQ0MDc1MiwiZXhwIjoxNTY3NTI3MTUyfQ.kgT7nP1k6ijdlmzWeD3euXIP8OBRBU4Ftk4HwJ3ca2s',
           )
           .then(res => {
             expect(res.status).toBe(200);
@@ -50,10 +52,10 @@ describe('server', () => {
         return request(server)
           .post('/api/auth/register')
           .send({
-            username: 'johnDoeseph',
-            password: 'hooboy',
-            department_id: 1,
-            position_id: 1,
+            username: 'JoseM',
+            password: 'testing123',
+            first_name: 'Jose',
+            last_name: 'M',
           })
           .then(res => {
             expect(res.status).toBe(201);
