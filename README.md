@@ -68,3 +68,9 @@ This endpoint will return an object with a welcome message, user id, username an
 | [GET All Income](#)     | `/api/income`           |
 | [GET Income by ID](#)   | `/api/income/:id`       |
 | [GET User Income](#)    | `/api/user/:id/income`  |
+| [POST Expense](#)       | `/api/expenses`         |
+| [POST Income](#)        | `/api/income`           |
+| [PUT Expense](#)        | `/api/expenses/:id`     |
+| [PUT Income](#)         | `/api/expenses/:id`     |
+
+All endpoints will return an object with the requested information.
