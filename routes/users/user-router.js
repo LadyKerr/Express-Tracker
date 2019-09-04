@@ -1,22 +1,23 @@
 const router = require('express').Router();
 
 const Users = require('./user-model');
-//const Expenses = require("../expenses/expense-model");
-//const restricted = require("../auth/auth-middleware");
+
+const restricted = require('../auth/auth-middleware');
 
 //get all users
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
   Users.fetchUsers()
     .then(users => {
       res.status(200).json(users);
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({ err, message: 'Error while retrieving users' });
     });
 });
 
 //get users by id
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
   const { id } = req.params;
 
   Users.fetchById(id)
@@ -36,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 //get user expenses
-router.get('/:id/expenses', (req, res) => {
+router.get('/:id/expenses', restricted, (req, res) => {
   const { id } = req.params;
 
   Users.getUserExpenses(id)
@@ -58,7 +59,7 @@ router.get('/:id/expenses', (req, res) => {
 });
 
 //get user income
-router.get('/:id/income', (req, res) => {
+router.get('/:id/income', restricted, (req, res) => {
   const { id } = req.params;
 
   Users.getUserIncome(id)
@@ -80,7 +81,7 @@ router.get('/:id/income', (req, res) => {
 });
 
 //update user
-router.put('/:id', (req, res) => {
+router.put('/:id', restricted, (req, res) => {
   const user = req.body;
   const { id } = req.params;
   Users.update(user, id)
