@@ -2,10 +2,9 @@
 
 const localPg = {
   host: 'localhost',
-  database: 'tipsease',
+  database: 'expense-tracker',
   user: 'tester1',
   password: 'testing123',
-  isServiceWorker: 0,
 };
 const productionDbConnection = process.env.DATABASE_URL || localPg;
 
