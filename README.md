@@ -2,13 +2,13 @@
 
 Track Your Coins (TYC) allows you to keep daily logs of your expenses. You can simple log into the app, submit your expenses for that day and keep it moving. At the end of the month, you will be able to see how much you've spent, and whether you spent more than you earned for that month.
 
-[_Deployed APP_](add link here)
+[_Deployed APP_](add FE link here)
 
 ---
 
 ## API Documentation
 
-**BASE URL** (add base heroku url here once deployed)
+**BASE URL:** https://track-your-coins-be.herokuapp.com/
 
 - Note: attach the base url to all endpoints
 
@@ -21,7 +21,7 @@ Track Your Coins (TYC) allows you to keep daily logs of your expenses. You can s
 
 ### [POST] Registration
 
-#### URL: (add url for register endpoint)
+#### URL: https://track-your-coins-be.herokuapp.com/auth/register
 
 This endpoint will return an object with user id, username, password, first_name (optional) and last_name (optional). The password will be a long incomprehensible string, because it is hashed. Example:
 
@@ -37,7 +37,7 @@ This endpoint will return an object with user id, username, password, first_name
 
 ### [POST] Login
 
-#### URL: (add url for login endpoint)
+#### URL: https://track-your-coins-be.herokuapp.com/auth/login
 
 This endpoint will return an object with a welcome message, user id, username and a token. The token is required for authentication and needs to be saved to local storage in order for the user to continue to protected routes. Example:
 
