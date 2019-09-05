@@ -10,10 +10,7 @@ exports.up = function(knex) {
 
     tbl.increments('id');
     tbl.decimal('amount').notNullable();
-    tbl
-      .string('category', 128)
-      .notNullable()
-      .unique();
+    tbl.string('category', 128).notNullable();
     tbl.text('notes', 500);
     tbl.string('date').notNullable();
     tbl.boolean('paid').defaultTo('false');
