@@ -1,10 +1,11 @@
 const router = require("express").Router();
 
 const Expenses = require("./expense-model");
-//const Users = require("../users/user-model");
+const restricted = require('../auth/auth-middleware');
+
 
 //get all expenses
-router.get("/", (req, res) => {
+router.get("/", restricted, (req, res) => {
   Expenses.fetchExpenses()
     .then(expense => {
       res.status(200).json(expense);
@@ -15,7 +16,7 @@ router.get("/", (req, res) => {
 });
 
 //get expense by id
-router.get("/:id", (req, res) => {
+router.get("/:id",  restricted, (req, res) => {
   const { id } = req.params;
 
   Expenses.fetchById(id)
@@ -37,7 +38,7 @@ router.get("/:id", (req, res) => {
 });
 
 //add new expense
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
   const { amount, category, notes, date, paid } = req.body;
 
   if (!amount || !category || !date) {
@@ -59,7 +60,7 @@ router.post("/", (req, res) => {
 });
 
 //update expense
-router.put("/:id", (req, res) => {
+router.put("/:id", restricted, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
   const { amount, category, date } = req.body;
@@ -87,7 +88,7 @@ router.put("/:id", (req, res) => {
 });
 
 //delete an expense
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
   Expenses.remove(id)

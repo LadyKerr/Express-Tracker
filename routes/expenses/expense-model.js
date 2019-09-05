@@ -26,12 +26,14 @@ function fetchBy(filter) {
   return db("expenses").where(filter);
 }
 
-//add expense
+//add new expense - updates for postgress
 function add(newExpense) {
   return db("expenses")
+    .returning("id")
     .insert(newExpense)
-    .then(id => {
-      return fetchById(id[0]);
+    .then(ids => {
+      const [id] = ids;
+      return fetchById(id);
     });
 }
 
@@ -46,5 +48,6 @@ function remove(id) {
 function update(id, changes) {
   return db("expenses")
     .where({ id })
-    .update(changes);
+    .update(changes)
+    .returning("id");
 }

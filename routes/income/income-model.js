@@ -26,12 +26,14 @@ function fetchBy(filter) {
   return db("income").where(filter);
 }
 
-//add income
+//add income - updates for postgress
 function add(newIncome) {
   return db("income")
+    .returning("id")
     .insert(newIncome)
-    .then(id => {
-      return fetchById(id[0]);
+    .then(ids => {
+      const [id] = ids;
+      return fetchById(id);
     });
 }
 
@@ -46,5 +48,6 @@ function remove(id) {
 function update(id, changes) {
   return db("income")
     .where({ id })
-    .update(changes);
+    .update(changes)
+    .returning("id");
 }

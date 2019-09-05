@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
       }
     });
   } else {
-    res.status(401).json({ message: "login unsuccessful. Please try again." });
+    res.status(401).json({ message: "restricted access. Please login." });
   }
 };
 

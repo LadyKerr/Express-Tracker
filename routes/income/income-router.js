@@ -1,9 +1,10 @@
 const router = require("express").Router();
 
 const Income = require("./income-model");
+const restricted = require("../auth/auth-middleware");
 
 //get all income
-router.get("/", (req, res) => {
+router.get("/", restricted, (req, res) => {
   Income.fetchIncome()
     .then(income => {
       res.status(200).json(income);
@@ -14,7 +15,7 @@ router.get("/", (req, res) => {
 });
 
 //get income by id
-router.get("/:id", (req, res) => {
+router.get("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
   Income.fetchById(id)
@@ -34,7 +35,7 @@ router.get("/:id", (req, res) => {
 });
 
 //add new income
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
   const { payor, amount } = req.body;
 
   if (!payor || !amount) {
@@ -54,7 +55,7 @@ router.post("/", (req, res) => {
 });
 
 //update income
-router.put("/:id", (req, res) => {
+router.put("/:id", restricted, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
   const { payor, amount } = req.body;
@@ -80,7 +81,7 @@ router.put("/:id", (req, res) => {
 });
 
 //delete an income
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
   Income.remove(id)
