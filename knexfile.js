@@ -60,17 +60,17 @@ module.exports = {
   //   }
   // },
 
-  // --------production environment used w/Heroku--------
-  // production: {
-  //   client: 'pg',
-  //   connection: productionDbConnection,
-  //   migrations: {
-  //     directory: './data/migrations',
-  //   },
-  //   seeds: {
-  //     directory: './data/seeds',
-  //   },
-  // },
+  //--------production environment used w/Heroku--------
+  production: {
+    client: 'pg',
+    connection: productionDbConnection,
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    },
+  },
 
   // production: {
   //   client: "postgresql",
