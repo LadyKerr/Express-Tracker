@@ -6,7 +6,12 @@ const generateToken = require("../../token/token");
 
 //Users can register
 router.post("/register", (req, res) => {
-  let user = req.body;
+  const user = req.body;
+
+  if (!user.username || !user.password) {
+    res.status(400).json({ message: "A username and password is required." });
+  }
+
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 
@@ -17,7 +22,7 @@ router.post("/register", (req, res) => {
     .catch(err => {
       res.status(500).json({
         err,
-        message: "the username or email already exist. Please login"
+        message: "Sign up failed, please try again."
       });
     });
 });
