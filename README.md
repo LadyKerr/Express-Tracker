@@ -21,7 +21,7 @@ Track Your Coins (TYC) allows you to keep daily logs of your expenses. You can s
 
 ### [POST] Registration
 
-#### URL: https://track-your-coins-be.herokuapp.com/auth/register
+#### URL: https://track-your-coins-be.herokuapp.com/api/auth/register
 
 This endpoint will return an object with user id, username, password, first_name (optional) and last_name (optional). The password will be a long incomprehensible string, because it is hashed. Example:
 
@@ -37,7 +37,7 @@ This endpoint will return an object with user id, username, password, first_name
 
 ### [POST] Login
 
-#### URL: https://track-your-coins-be.herokuapp.com/auth/login
+#### URL: https://track-your-coins-be.herokuapp.com/api/auth/login
 
 This endpoint will return an object with a welcome message, user id, username and a token. The token is required for authentication and needs to be saved to local storage in order for the user to continue to protected routes. Example:
 
